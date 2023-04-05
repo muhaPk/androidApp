@@ -1,6 +1,8 @@
 import React from 'react';
 
 import styled from 'styled-components/native';
+import {Text} from "../../ui/Grid/Text"
+import {Container} from "../../ui/Grid/Container";
 
 export const Users = () => {
 
@@ -12,13 +14,3 @@ export const Users = () => {
 
     );
 }
-
-const Container = styled.View`
-  background: #354052;
-  height: 100%;
-`;
-const Text = styled.Text`
-  font-size: 18px;
-  font-weight: normal;
-  color: #eee;
-`;

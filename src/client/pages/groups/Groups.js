@@ -3,6 +3,8 @@ import styled from 'styled-components/native';
 import {useNavigation} from "@react-navigation/native";
 import {useSelector} from "react-redux";
 import {CustomFloatButton} from "../../ui/CustomFloatButton";
+import {Container} from "../../ui/Grid/Container";
+import {Text} from "../../ui/Grid/Text"
 
 
 export const Groups = () => {
@@ -31,14 +33,3 @@ export const Groups = () => {
     );
 }
 
-
-
-const Container = styled.View`
-  background: #354052;
-  height: 100%;
-`;
-const Text = styled.Text`
-  font-size: 14px;
-  font-weight: normal;
-  color: #eee;
-`;

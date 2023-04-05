@@ -1,11 +1,12 @@
-import styled from 'styled-components/native';
+import React from "react";
 
+import styled from 'styled-components/native';
 import { useForm, Controller } from "react-hook-form";
 import {CustomButton} from "../../ui/CustomButton"
 import {registration} from "../../src/actions/user";
 import {useNavigation} from "@react-navigation/native";
 import {CustomInput} from "../../ui/CustomInput";
-import React from "react";
+import {Container} from "../../ui/Grid/Container";
 
 export const Registration = () => {
 
@@ -41,11 +42,6 @@ export const Registration = () => {
 
     );
 }
-
-const Container = styled.View`
-  background: #354052;
-  height: 100%;
-`
 
 const Link = styled.Text`
   color: white;

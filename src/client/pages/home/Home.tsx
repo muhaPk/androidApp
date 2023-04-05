@@ -5,11 +5,10 @@ import { Colors } from '../../consts';
 import styled from 'styled-components/native';
 // import {useNavigation} from "@react-navigation/native";
 
-const {backgroundColor} = Colors
+import {Container} from "../../ui/Grid/Container";
+import {Text} from "../../ui/Grid/Text"
 
 export const Home = () => {
-
-  console.log("home");
 
     return (
         <Container>
@@ -19,12 +18,4 @@ export const Home = () => {
     );
 }
 
-const Container = styled.View`
-  background: ${backgroundColor};
-  height: 100%;
-`;
-const Text = styled.Text`
-  font-size: 18px;
-  font-weight: normal;
-  color: #eee;
-`;
+

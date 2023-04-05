@@ -7,7 +7,7 @@ import {CustomInput} from "../../ui/CustomInput";
 import {useDispatch} from "react-redux";
 import {createGroup} from "../../src/actions/group";
 import {launchImageLibrary} from 'react-native-image-picker';
-
+import {Container} from "../../ui/Grid/Container";
 
 export const CreateGroup = () => {
 
@@ -57,10 +57,7 @@ export const CreateGroup = () => {
     );
 }
 
-const Container = styled.View`
-  background: #354052;
-  height: 100%;
-`;
+
 const Text = styled.Text`
   font-size: 18px;
   font-weight: normal;

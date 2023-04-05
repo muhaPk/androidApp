@@ -1,13 +1,14 @@
+import React from "react";
 import {useDispatch} from "react-redux";
 import { Colors } from '../../consts';
-import styled from 'styled-components/native';
 
+import styled from 'styled-components/native';
 import { useForm } from "react-hook-form";
 import {CustomButton} from "../../ui/CustomButton"
 import {login} from "../../src/actions/user";
 import {useNavigation} from "@react-navigation/native";
 import {CustomInput} from "../../ui/CustomInput";
-import React from "react";
+import { Container } from "../../ui/Grid/Container";
 
 const {backgroundColor} = Colors
 
@@ -45,11 +46,6 @@ export const Auth = () => {
 
     );
 }
-
-const Container = styled.View`
-  background: ${backgroundColor};
-  height: 100%;
-`
 
 const Link = styled.Text`
   color: white;
