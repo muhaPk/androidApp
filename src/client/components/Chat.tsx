@@ -3,9 +3,16 @@ import { Text } from 'react-native';
 import { Row } from '../ui/Grid/Row';
 import { CustomTextarea } from "../ui/CustomTextarea";
 import { useForm } from "react-hook-form";
-import { login } from "../src/actions/user";
+import styled from 'styled-components/native';
+import { createGroupMessage } from "../src/actions/message";
+import { CustomButton } from "../ui/CustomButton";
+import { useDispatch, useSelector } from "react-redux";
 
-export const Chat = () => {
+export const Chat = ({groupId}) => {
+
+  const dispatch = useDispatch()
+
+  const {user} = useSelector(state => state)
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
@@ -14,22 +21,33 @@ export const Chat = () => {
   });
 
   const onSubmit = data => {
-    // dispatch(login(data.email, data.password))
+    // @ts-ignore
+    dispatch(createGroupMessage(user?.currentUser?.id, groupId, data?.message))
   };
 
 
   return (
     <>
-      <Row>
+      <ChatField>
         <Text>1</Text>
-      </Row>
+      </ChatField>
 
 
       <Row>
         <CustomTextarea control={control} errors={errors} placeholder="Название" name="message" />
+        <CustomButton type="button" title="Send" onPress={handleSubmit(onSubmit)} />
       </Row>
     </>
 
 
   )
 }
+
+
+const ChatField = styled.View`
+  display: flex;
+  flex: 1;
+  padding: 5px;
+  background: #4b586d;
+  color: #ccc;
+`;

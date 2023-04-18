@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const Group = require("../models/Group");
+const GroupMessage = require("../models/GroupMessage");
 const File = require("../models/File");
 
 
@@ -46,6 +47,7 @@ class AuthController {
             const token = jwt.sign({id: user.id}, config.get("secretKey"), {expiresIn: "12h"})
 
             const groups = await Group.find()
+            const groupMessages = await GroupMessage.find()
             const files = await File.find()
 
             return res.json({
@@ -58,6 +60,7 @@ class AuthController {
                 },
                 groups,
                 files,
+                groupMessages,
             })
 
         } catch (e) {

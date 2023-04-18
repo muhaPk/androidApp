@@ -4,6 +4,7 @@ import {setGroups} from "../reducers/groupReducer"
 import {URL} from "../../consts"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setFiles } from "../reducers/fileReducer";
+import { setGroupMessage } from "../reducers/groupMessgeReducer";
 
 export const registration = async (email, password) => {
     try {
@@ -28,6 +29,7 @@ export const login = (email, password) => {
             dispatch(setUser(response.data.user))
             dispatch(setGroups(response.data.groups))
             dispatch(setFiles(response.data.files))
+            dispatch(setGroupMessage(response.data.groupMessages))
             await AsyncStorage.setItem('secure_token', response.data.token)
 
         } catch (error) {

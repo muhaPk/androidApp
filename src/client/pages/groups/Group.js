@@ -56,7 +56,7 @@ export const Group = ({route}) => {
             <Text>{group.name}</Text>
             <Text>{group.description}</Text>
 
-            <Chat></Chat>
+            <Chat groupId={route?.params?.id} />
 
 
         </Container>

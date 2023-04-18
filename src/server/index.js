@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const config = require('config');
 const authRouter = require('./routes/auth.routs');
 const groupRouter = require('./routes/group.routs');
+const messageRouter = require('./routes/message.routs');
 const fileRouter = require('./routes/file.routs');
 const fileUpload = require('express-fileupload');
 
@@ -24,6 +25,7 @@ app.use(fileUpload({}))
 app.use(express.json())
 app.use("/api/auth", authRouter)
 app.use("/api/group", groupRouter)
+app.use("/api/message", messageRouter)
 app.use("/api/file", fileRouter)
 
 const start = async () => {

@@ -20,8 +20,8 @@ export const CustomTextarea = ({control, errors, placeholder, name, ...rest}) =>
             render={({ field: { onChange, onBlur, value } }) => (
 
                     <View style={{
-                        borderBottomWidth: 1,
-                        borderBottomColor: inputStyle
+                        display: 'flex',
+                        flex: 1,
                     }}>
 
                         <TextInput
