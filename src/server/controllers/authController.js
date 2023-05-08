@@ -46,6 +46,7 @@ class AuthController {
 
             const token = jwt.sign({id: user.id}, config.get("secretKey"), {expiresIn: "12h"})
 
+            const users = await User.find()
             const groups = await Group.find()
             const groupMessages = await GroupMessage.find()
             const files = await File.find()
@@ -58,6 +59,7 @@ class AuthController {
                     diskSpace: user.diskSpace,
                     usedSpace: user.usedSpace
                 },
+                users,
                 groups,
                 files,
                 groupMessages,

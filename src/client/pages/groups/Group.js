@@ -48,7 +48,7 @@ export const Group = ({route}) => {
     const filePath = useMemo(() => {
         return file?.path;
     }, [file?.path]);
-
+    
     return (
         <Container>
 

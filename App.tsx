@@ -32,7 +32,7 @@ export default function App() {
 
 const Navigator = () => {
 
-  const isAuth = useSelector(state => state.user.isAuth)
+  const isAuth = useSelector(state => state.users.isAuth)
 
   return (
     <NavigationContainer>

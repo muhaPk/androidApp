@@ -4,7 +4,7 @@ import {Controller} from "react-hook-form";
 import {Colors} from "../consts"
 
 export const CustomInput = ({control, errors, placeholder, name, ...rest}) => {
-
+  
     const {underlineColor, underlineActiveColor} = Colors
 
     const [inputStyle, setInputStyle] = useState(underlineColor);

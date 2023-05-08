@@ -27,7 +27,6 @@ class MessagesController {
     try {
       const {user_id, group_id, message} = req.body
 
-
       const createMessage = new GroupMessage({user_id, group_id, message})
       const messageResult = await createMessage.save()
 

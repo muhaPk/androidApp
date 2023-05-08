@@ -1,5 +1,5 @@
 import axios from "axios"
-import {setUser} from "../reducers/userReducer"
+import {setUser, setUsers} from "../reducers/usersReducer"
 import {setGroups} from "../reducers/groupReducer"
 import {URL} from "../../consts"
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -27,6 +27,7 @@ export const login = (email, password) => {
             })
             console.log("user.js login response", response.data)
             dispatch(setUser(response.data.user))
+            dispatch(setUsers(response.data.users))
             dispatch(setGroups(response.data.groups))
             dispatch(setFiles(response.data.files))
             dispatch(setGroupMessage(response.data.groupMessages))

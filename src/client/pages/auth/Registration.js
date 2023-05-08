@@ -28,7 +28,7 @@ export const Registration = () => {
         <Container>
 
             <CustomInput control={control} errors={errors} placeholder="Е-маил" name="email" />
-            <CustomInput control={control} errors={errors} placeholder="Пароль" name="password" />
+            <CustomInput control={control} errors={errors} placeholder="Пароль" name="password" type="password" />
 
             <CustomButton title="Регистрация" onPress={handleSubmit(onSubmit)} />
 

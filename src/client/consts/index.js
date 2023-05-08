@@ -1,4 +1,4 @@
-export const URL = "https://36df-178-168-113-229.ngrok-free.app"
+export const URL = "https://eda5-178-168-113-229.ngrok-free.app"
 // export const URL = "http://localhost:5000"
 
 export const Colors = {
