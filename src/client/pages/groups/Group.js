@@ -3,8 +3,6 @@ import {Image} from 'react-native'
 import styled from 'styled-components/native';
 import {useSelector} from "react-redux";
 import {ImageWrapper} from "../../components/ImageWrapper"
-import io from "socket.io-client"
-import { URL } from "../../consts"
 import { Chat } from "../../components/Chat"
 import { Container } from "../../ui/Grid/Container";
 import { Text } from "../../ui/Grid/Text";
@@ -32,23 +30,10 @@ export const Group = ({route}) => {
     }, [route?.params?.id]);
 
 
-    const socket = io.connect(URL);
-
-    useEffect(() => {
-        socket.emit('join', 'text')
-    }, []);
-
-    useEffect(() => {
-        socket.on("message", ( data ) => {
-            console.log("message data", data);
-        });
-    }, []);
-
-
     const filePath = useMemo(() => {
         return file?.path;
     }, [file?.path]);
-    
+
     return (
         <Container>
 

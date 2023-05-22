@@ -9,6 +9,9 @@ const groupMessageReducer = createSlice( {
         setGroupMessage(state, action) {
             state.groupMessages = action.payload
         },
+        addGroupMessage(state, action) {
+            state.groupMessages.push(action.payload)
+        },
         resetGroupMessage(state) {
             state.groupMessages = []
         }
@@ -16,4 +19,4 @@ const groupMessageReducer = createSlice( {
 })
 
 export default groupMessageReducer.reducer
-export const {setGroupMessage, resetGroupMessage} = groupMessageReducer.actions
+export const {setGroupMessage, addGroupMessage, resetGroupMessage} = groupMessageReducer.actions

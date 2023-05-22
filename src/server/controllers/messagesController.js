@@ -40,6 +40,26 @@ class MessagesController {
 
   }
 
+
+  async getLastGroupMessages(req, res) {
+
+    try {
+      const {group_id, date} = req.body
+
+      const messages = await GroupMessage.find({
+        group_id: group_id,
+        date: {$gt: date},
+      });
+      return res.json({messages})
+
+    } catch (e) {
+      console.log(e)
+      res.send({message: "Server error"})
+    }
+
+  }
+
+
 }
 
 module.exports = new MessagesController()

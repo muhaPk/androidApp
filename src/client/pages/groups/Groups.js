@@ -1,4 +1,5 @@
 import React from 'react';
+import { ScrollView } from "react-native"
 import styled from 'styled-components/native';
 import {useNavigation} from "@react-navigation/native";
 import {useSelector} from "react-redux";
@@ -14,9 +15,7 @@ const CustomFloatButton = styled.View`
   width: 10px;
   backgroundcolod: #333;
 `;
-const Relative = styled.View`
-  position: relative;
-`;
+
 
 export const Groups = () => {
 
@@ -25,8 +24,7 @@ export const Groups = () => {
     const navigation = useNavigation();
 
     return (
-        <Relative as={Container}>
-
+        <Container as={ScrollView}>
 
           <Row direction='column'>
             {
@@ -44,7 +42,7 @@ export const Groups = () => {
             }}>
             </CustomFloatButton>
 
-        </Relative>
+        </Container>
 
     );
 }

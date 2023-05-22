@@ -2,7 +2,7 @@ import axios from "axios"
 import {setFile} from "../reducers/fileReducer"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {URL} from "../../consts"
+import {HTTPS, URL} from "../../consts"
 
 export const uploadFile = (host_id, file) => {
     return async dispatch => {
@@ -18,7 +18,7 @@ export const uploadFile = (host_id, file) => {
             })
             formData.append('host_id', host_id)
 
-            const response = await axios.post(`${URL}/api/file/upload`, formData, {
+            const response = await axios.post(`${HTTPS}${URL}/api/file/upload`, formData, {
                 headers: {
                     Authorization:`Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'

@@ -8,12 +8,13 @@ const fileRouter = require('./routes/file.routs');
 const fileUpload = require('express-fileupload');
 
 const app = express();
-const {Server} = require('socket.io');
 const http = require('http');
 const server = http.createServer(app);
+
+const {Server} = require('socket.io');
 const io = new Server(server);
 
-const Port = config.get('serverPort')
+const Port = config.get('serverPort');
 
 // const corsMiddleware = require('./middleware/cors.middleware')
 // const cors = require('cors');
@@ -30,27 +31,28 @@ app.use("/api/file", fileRouter)
 
 const start = async () => {
     try {
+
+        io.on('connect', (socket) => {
+
+            socket.on("newMessage",  groupId => {
+
+                socket.join(groupId);
+                socket.broadcast.to(groupId).emit('updateMessages', groupId);
+
+                // socket.emit('updateMessages', groupId);
+            } );
+
+            io.on('disconnect', () => {
+                console.log('disconnect');
+            })
+        });
+
         await mongoose.set("strictQuery", false)
         await mongoose.connect(config.get('dbUrl'))
 
         server.listen(Port, () => {
             console.log('server started', Port)
         })
-
-        io.on('connection', (socket) => {
-
-            socket.on("join", ( data ) => {
-                socket.join(data);
-            } );
-
-            socket.emit('message', 'message data')
-
-
-
-            io.on('disconnect', () => {
-                console.log('disconnect');
-            })
-        });
 
     } catch (e) {
         console.log("start error: ", e);

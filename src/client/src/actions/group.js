@@ -1,7 +1,7 @@
 import axios from "axios"
 import {setGroup} from "../reducers/groupReducer"
 
-import {URL} from "../../consts"
+import { HTTPS, URL } from "../../consts";
 import { uploadFile } from "./file";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -11,7 +11,7 @@ export const createGroup = (name, description, file) => {
 
             const token = await AsyncStorage.getItem('secure_token');
 
-            const {data} = await axios.post(`${URL}/api/group/createGroup`, {
+            const {data} = await axios.post(`${HTTPS}${URL}/api/group/createGroup`, {
                 name,
                 description,
             }, {

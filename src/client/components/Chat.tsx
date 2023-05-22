@@ -1,14 +1,14 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState, useRef } from "react";
 import { Row } from '../ui/Grid/Row';
 import { CustomTextarea } from "../ui/CustomTextarea";
 import { useForm } from "react-hook-form";
 import styled from 'styled-components/native';
-import { createGroupMessage } from "../src/actions/message";
+import { createGroupMessage, getLastGroupMessages } from "../src/actions/message";
 import { CustomButton } from "../ui/CustomButton";
 import { useDispatch, useSelector } from "react-redux";
+import io from "socket.io-client"
+import {WS, URL, Colors} from '../consts'
 
-
-import { Colors } from '../consts';
 const {textColor} = Colors
 
 export const Chat: FC = ({groupId}: any) => {
@@ -20,8 +20,9 @@ export const Chat: FC = ({groupId}: any) => {
   const { groupMessages } = useSelector(state => state.groupMessages)
   const { users } = useSelector(state => state.users)
   const user = useSelector(state => state.users)
-  
-  
+
+  const socket = io(WS + URL);
+
   useEffect(() => {
 
     const customUsers = []
@@ -36,6 +37,12 @@ export const Chat: FC = ({groupId}: any) => {
   }, [users, groupMessages])
 
 
+  useEffect(() => {
+    socket.on("updateMessages", get_groupId => {
+      dispatch(getLastGroupMessages(get_groupId, groupMessages[groupMessages.length - 1].date));
+    });
+  }, [dispatch, groupMessages]);
+
   const { control, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
       message: ''
@@ -45,14 +52,22 @@ export const Chat: FC = ({groupId}: any) => {
   const onSubmit = useCallback(data => {
       dispatch(createGroupMessage(user?.currentUser?.id, groupId, data?.message));
       reset();
+      socket.emit('newMessage', groupId)
     },
     [user, groupId, reset],
   );
-  
+
+
+  const scrollViewRef = useRef();
+
+
   return (
     <>
-      <ChatField>
-        <Row direction="column">
+      <MessagesWrapper
+        ref={scrollViewRef}
+        onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+      >
+        <Messages as={Row} direction="column">
           {groupMessagesData.map(({email, message}, i) => (
           <Row key={i}>
             <CustomText>{email}: </CustomText>
@@ -60,9 +75,9 @@ export const Chat: FC = ({groupId}: any) => {
           </Row>
 
           ))}
-        </Row>
+        </Messages>
 
-      </ChatField>
+      </MessagesWrapper>
 
 
       <Row>
@@ -76,12 +91,16 @@ export const Chat: FC = ({groupId}: any) => {
 }
 
 
-const ChatField = styled.View`
+const Messages = styled.View`
+  padding: 5px 5px 10px;
+`;
+
+const MessagesWrapper = styled.ScrollView`
   display: flex;
   flex: 1;
-  padding: 5px;
   background: #4b586d;
   color: #ccc;
+  overflow: hidden;
 `;
 
 export const CustomText = styled.Text`
