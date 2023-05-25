@@ -6,8 +6,8 @@ import styled from 'styled-components/native';
 import { createGroupMessage, getLastGroupMessages } from "../src/actions/message";
 import { CustomButton } from "../ui/CustomButton";
 import { useDispatch, useSelector } from "react-redux";
-import io from "socket.io-client"
-import {WS, URL, Colors} from '../consts'
+import {Colors} from '../consts'
+import {socket} from "../libs/socket"
 
 const {textColor} = Colors
 
@@ -19,9 +19,7 @@ export const Chat: FC = ({groupId}: any) => {
 
   const { groupMessages } = useSelector(state => state.groupMessages)
   const { users } = useSelector(state => state.users)
-  const user = useSelector(state => state.users)
-
-  const socket = io(WS + URL);
+  const { currentUser } = useSelector(state => state.users)
 
   useEffect(() => {
 
@@ -38,10 +36,13 @@ export const Chat: FC = ({groupId}: any) => {
 
 
   useEffect(() => {
-    socket.on("updateMessages", get_groupId => {
-      dispatch(getLastGroupMessages(get_groupId, groupMessages[groupMessages.length - 1].date));
+    socket.on("updateMessages", () => {
+      console.log("updateMessages");
+      // dispatch(getLastGroupMessages(groupId));
     });
-  }, [dispatch, groupMessages]);
+
+    return () => socket.emit("leaveRoom", groupId);
+  }, [groupId]);
 
   const { control, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
@@ -50,11 +51,11 @@ export const Chat: FC = ({groupId}: any) => {
   });
 
   const onSubmit = useCallback(data => {
-      dispatch(createGroupMessage(user?.currentUser?.id, groupId, data?.message));
+      dispatch(createGroupMessage(currentUser?.id, groupId, data?.message));
       reset();
-      socket.emit('newMessage', groupId)
+      socket.emit('newMessage', groupId);
     },
-    [user, groupId, reset],
+    [currentUser, groupId, reset, dispatch],
   );
 
 

@@ -44,12 +44,9 @@ class MessagesController {
   async getLastGroupMessages(req, res) {
 
     try {
-      const {group_id, date} = req.body
+      const {group_id} = req.body
 
-      const messages = await GroupMessage.find({
-        group_id: group_id,
-        date: {$gt: date},
-      });
+      const messages = await GroupMessage.findOne({ group_id: group_id }).sort({_id: -1});
       return res.json({messages})
 
     } catch (e) {

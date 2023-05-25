@@ -5,6 +5,7 @@ import {HTTPS, URL} from "../../consts"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setFiles } from "../reducers/fileReducer";
 import { setGroupMessage } from "../reducers/groupMessgeReducer";
+import { socket } from "../../libs/socket";
 
 export const registration = async (email, password) => {
     try {
@@ -25,7 +26,6 @@ export const login = (email, password) => {
                 email,
                 password
             })
-            console.log("user.js login response", data)
             dispatch(setUser(data.user))
             dispatch(setUsers(data.users))
             dispatch(setGroups(data.groups))

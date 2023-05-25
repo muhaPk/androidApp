@@ -35,9 +35,7 @@ export const createGroupMessage: FC = (
 }
 
 
-export const getLastGroupMessages: FC = (
-  group_id: string,
-  date: any) => {
+export const getLastGroupMessages: FC = (group_id: string) => {
 
     return async dispatch => {
         try {
@@ -45,18 +43,14 @@ export const getLastGroupMessages: FC = (
             const token = await AsyncStorage.getItem('secure_token');
 
             const {data} = await axios.post(`${HTTPS}${URL}/api/message/getLastGroupMessages`, {
-                group_id, date,
+                group_id
             }, {
                 headers: {
                     Authorization:`Bearer ${token}`
                 }
             })
 
-            if (date !== data.messages[0].date) {
-                console.log("addGroupMessage", data.messages[0].message);
-                dispatch(addGroupMessage(data.messages[0]))
-            }
-
+            dispatch(addGroupMessage(data.messages));
 
         } catch (error) {
             console.log("message.js getLastGroupMessages catch", error, error.response)

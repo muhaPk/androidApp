@@ -34,15 +34,23 @@ const start = async () => {
 
         io.on('connect', (socket) => {
 
-            socket.on("newMessage",  groupId => {
+            socket.on("leaveRoom",  groupId => {
+                socket.leave(groupId);
+                console.log("leave", socket.rooms);
+            } );
 
+            socket.on("joinToRoom",  groupId => {
                 socket.join(groupId);
-                socket.broadcast.to(groupId).emit('updateMessages', groupId);
+                console.log("joinToRoom", socket.rooms);
+            } );
 
-                // socket.emit('updateMessages', groupId);
+            socket.on("newMessage",  groupId => {
+                socket.broadcast.to(groupId).emit('updateMessages');
+                console.log("newMessage", socket.rooms);
             } );
 
             io.on('disconnect', () => {
+                // socket.disconnect();
                 console.log('disconnect');
             })
         });
