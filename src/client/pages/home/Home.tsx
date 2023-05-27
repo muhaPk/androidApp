@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { Colors } from '../../consts';
 // import { Button } from 'react-native';
 
@@ -8,7 +8,7 @@ import styled from 'styled-components/native';
 import {Container} from "../../ui/Grid/Container";
 import {Text} from "../../ui/Grid/Text"
 
-export const Home = () => {
+export const Home: FC = () => {
 
     return (
         <Container>

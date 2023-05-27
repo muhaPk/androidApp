@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const groupMessageReducer = createSlice( {
     name: 'groupMessage',
@@ -6,17 +6,17 @@ const groupMessageReducer = createSlice( {
         groupMessages: [],
     },
     reducers: {
-        setGroupMessage(state, action) {
+        setGroupMessage(state, action: PayloadAction<any>) {
             state.groupMessages = action.payload
         },
-        addGroupMessage(state, action) {
+        addGroupMessage(state, action: PayloadAction<any>) {
             state.groupMessages.push(action.payload)
         },
-        resetGroupMessage(state) {
+        clearMessages(state) {
             state.groupMessages = []
         }
     }
 })
 
 export default groupMessageReducer.reducer
-export const {setGroupMessage, addGroupMessage, resetGroupMessage} = groupMessageReducer.actions
+export const {setGroupMessage, addGroupMessage, clearMessages} = groupMessageReducer.actions

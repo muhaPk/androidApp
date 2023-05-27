@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC, ReactNode} from 'react';
 
 import {Dimensions} from 'react-native'
 import { Colors } from '../consts';
@@ -10,8 +10,11 @@ import { Header } from './header';
 
 import styled from 'styled-components/native';
 
+type Props = {
+  children: ReactNode;
+};
 
-export const MainLayout = ({ children }) => {
+export const MainLayout: FC<Props> = ({children}: Props) => {
 
     return (
         <Container>

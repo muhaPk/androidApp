@@ -1,16 +1,15 @@
-import React, {FC} from 'react';
 import axios from "axios"
 import {setGroupMessage, addGroupMessage} from "../reducers/groupMessgeReducer"
 
 import {HTTPS, URL} from "../../consts"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const createGroupMessage: FC = (
+export const createGroupMessage = (
   user_id: string,
   group_id: string,
   message: string) => {
 
-    return async dispatch => {
+    return async (dispatch: any) => {
         try {
 
             const token = await AsyncStorage.getItem('secure_token');
@@ -21,7 +20,7 @@ export const createGroupMessage: FC = (
                 message,
             }, {
                 headers: {
-                    Authorization:`Bearer ${token}`
+                    Authorization:`Bearer ${token}`,
                 }
             })
 
@@ -35,9 +34,9 @@ export const createGroupMessage: FC = (
 }
 
 
-export const getLastGroupMessages: FC = (group_id: string) => {
+export const getLastGroupMessages = (group_id: string) => {
 
-    return async dispatch => {
+    return async (dispatch: any) => {
         try {
 
             const token = await AsyncStorage.getItem('secure_token');
@@ -46,7 +45,7 @@ export const getLastGroupMessages: FC = (group_id: string) => {
                 group_id
             }, {
                 headers: {
-                    Authorization:`Bearer ${token}`
+                    Authorization:`Bearer ${token}`,
                 }
             })
 

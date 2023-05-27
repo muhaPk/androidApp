@@ -5,8 +5,8 @@ import { HTTPS, URL } from "../../consts";
 import { uploadFile } from "./file";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const createGroup = (name, description, file) => {
-    return async dispatch => {
+export const createGroup = (name: string, description: string, file: object) => {
+    return async (dispatch: any) => {
         try {
 
             const token = await AsyncStorage.getItem('secure_token');

@@ -11,25 +11,29 @@ import {socket} from "../libs/socket"
 
 const {textColor} = Colors
 
-export const Chat: FC = ({groupId}: any) => {
+type Props = {
+  groupId: string
+}
+
+export const Chat: FC<Props> = ({groupId}: Props) => {
 
   const dispatch = useDispatch()
 
-  const [groupMessagesData, setGroupMessagesData] = useState([]);
+  const [groupMessagesData, setGroupMessagesData] = useState<any[]>([]);
 
-  const { groupMessages } = useSelector(state => state.groupMessages)
-  const { users } = useSelector(state => state.users)
-  const { currentUser } = useSelector(state => state.users)
+  const { groupMessages } = useSelector((state: any) => state.groupMessages)
+  const { users } = useSelector((state: any) => state.users)
+  const { currentUser } = useSelector((state: any) => state.users)
 
   useEffect(() => {
 
     const customUsers = []
-    users.forEach(user => customUsers[user._id] = user.email)
+    users.forEach((user: any) => (customUsers[user._id] = user.email));
 
     const customMessages = []
     groupMessages
-      .filter(message => message.group_id === groupId)
-      .forEach(message => customMessages.push({...message, email: customUsers[message.user_id]}))
+      .filter((message: any) => message.group_id === groupId)
+      .forEach((message: any) => customMessages.push({...message, email: customUsers[message.user_id]}))
 
     setGroupMessagesData(customMessages)
   }, [users, groupMessages])
@@ -71,8 +75,8 @@ export const Chat: FC = ({groupId}: any) => {
         <Messages as={Row} direction="column">
           {groupMessagesData.map(({email, message}, i) => (
           <Row key={i}>
-            <CustomText>{email}: </CustomText>
-            <CustomText>{message}</CustomText>
+              <CustomText>{email}: </CustomText>
+              <CustomText>{message}</CustomText>
           </Row>
 
           ))}
@@ -86,7 +90,6 @@ export const Chat: FC = ({groupId}: any) => {
         <CustomButton type="button" title="Send" onPress={handleSubmit(onSubmit)} />
       </Row>
     </>
-
 
   )
 }

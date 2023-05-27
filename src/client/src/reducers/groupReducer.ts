@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const groupReducer = createSlice( {
     name: 'groups',
@@ -6,17 +6,17 @@ const groupReducer = createSlice( {
         groups: [],
     },
     reducers: {
-        setGroups(state, action) {
+        setGroups(state, action: PayloadAction<any>) {
             state.groups = action.payload
         },
-        setGroup(state, action) {
+        setGroup(state, action: PayloadAction<any>) {
             state.groups.push(action.payload)
         },
-        resetGroups(state) {
+        clearGroups(state) {
             state.groups = []
         }
     }
 })
 
 export default groupReducer.reducer
-export const {setGroups, setGroup, resetGroups} = groupReducer.actions
+export const {setGroups, setGroup, clearGroups} = groupReducer.actions

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {FC} from 'react';
 
 import styled from 'styled-components/native';
 
@@ -6,16 +6,16 @@ import { useNavigation } from '@react-navigation/native';
 
 import { Row } from '../ui/Grid/Row';
 import { IconButton } from "react-native-paper";
-import Icon from "react-native-vector-icons/Ionicons";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../src/reducers/usersReducer";
-import {resetGroups} from "../src/reducers/groupReducer";
-import {resetFiles} from "../src/reducers/fileReducer";
+import {clearGroups} from "../src/reducers/groupReducer";
+import {clearFiles} from "../src/reducers/fileReducer";
+import {clearMessages} from "../src/reducers/groupMessgeReducer";
 
-export const Header = () => {
+export const Header: FC = () => {
 
-    const isAuth = useSelector(state => state.users.isAuth)
-    const currentUser = useSelector(state => state.users.currentUser)
+    const isAuth = useSelector((state: any) => state.users.isAuth)
+    const currentUser = useSelector((state: any) => state.users.currentUser)
 
     const dispatch = useDispatch()
 
@@ -42,8 +42,9 @@ export const Header = () => {
 
                             <IconButton
                                 onPress={() => {
-                                    dispatch(resetGroups())
-                                    dispatch(resetFiles())
+                                    dispatch(clearGroups())
+                                    dispatch(clearFiles())
+                                    dispatch(clearMessages())
                                     dispatch(logout())
                                 }}
                                 icon="logout"

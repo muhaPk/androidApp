@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styled from 'styled-components/native';
 
 import { Row } from '../ui/Grid/Row';
@@ -6,19 +6,13 @@ import {useNavigation} from "@react-navigation/native";
 import {IconButton} from "react-native-paper";
 
 
-export const Footer = () => {
+export const Footer: FC = () => {
 
     const navigation = useNavigation();
 
     return (
         <Container>
             <Row justify='space-between'>
-                {/*<Text onPress={() => {*/}
-                {/*    navigation.navigate('Groups');*/}
-                {/*}}>Groups</Text>*/}
-                {/*<Text onPress={() => {*/}
-                {/*    navigation.navigate('Users');*/}
-                {/*}}>Users</Text>*/}
 
                 <IconButton
                     onPress={() => { navigation.navigate('Groups'); }}
@@ -39,13 +33,8 @@ export const Footer = () => {
 };
 
 
-
 const Container = styled.View`
   padding: 5px;
   background: #4b586d;
   color: #ccc;
-`;
-
-const Text = styled.Text`
-  color: #eee;
 `;

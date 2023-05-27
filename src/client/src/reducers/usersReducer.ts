@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 const usersReducer = createSlice({
   name: 'users',
@@ -8,15 +8,16 @@ const usersReducer = createSlice({
     isAuth: false,
   },
   reducers: {
-    setUsers(state, action) {
+    setUsers(state, action: PayloadAction<any>) {
       state.users = action.payload
     },
-    setUser(state, action) {
+    setUser(state, action: PayloadAction<any>) {
       state.currentUser = action.payload
       state.isAuth = true
     },
     logout(state) {
       state.currentUser = {}
+      state.users = []
       state.isAuth = false
     },
   },

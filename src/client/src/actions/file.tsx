@@ -1,13 +1,12 @@
-import axios from "axios"
-import {setFile} from "../reducers/fileReducer"
+import axios from 'axios';
+import {setFile} from '../reducers/fileReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {HTTPS, URL} from "../../consts"
+import {HTTPS, URL} from '../../consts';
 
-export const uploadFile = (host_id, file) => {
-    return async dispatch => {
+export const uploadFile = (host_id: string, file: object) => {
+    return async (dispatch: any) => {
         try {
-
             const token = await AsyncStorage.getItem('secure_token');
 
             const formData = new FormData()

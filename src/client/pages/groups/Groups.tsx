@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { ScrollView } from "react-native"
 import styled from 'styled-components/native';
 import {useNavigation} from "@react-navigation/native";
@@ -12,20 +12,24 @@ const CustomFloatButton = styled.View`
   position: absolute;
   right: 10px;
   bottom: 10px;
-  height: 10px;
-  width: 10px;
-  backgroundcolod: #333;
+  height: 15px;
+  width: 15px;
+  backgroundColor: #000;
+  cursor: pointer;
+  z-index: 9;
 `;
 
 
-export const Groups = () => {
+export const Groups: FC = () => {
 
-    const groups = useSelector(state => state.groups.groups)
+    const groups = useSelector((state: any) => state.groups.groups)
 
     const navigation = useNavigation();
 
     return (
-        <Container as={ScrollView}>
+        <Container>
+
+          <ScrollView>
 
           <Row direction='column'>
             {
@@ -38,11 +42,12 @@ export const Groups = () => {
             }
           </Row>
 
+          </ScrollView>
 
-            <CustomFloatButton onPress={() => {
-                navigation.navigate('CreateGroup');
-            }}>
-            </CustomFloatButton>
+          <CustomFloatButton onPress={() => {
+              navigation.navigate('CreateGroup');
+          }}>
+          </CustomFloatButton>
 
         </Container>
 

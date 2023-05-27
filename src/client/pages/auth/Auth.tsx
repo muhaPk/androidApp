@@ -1,6 +1,5 @@
-import React from "react";
+import React, {FC} from "react";
 import {useDispatch} from "react-redux";
-import { Colors } from '../../consts';
 
 import styled from 'styled-components/native';
 import { useForm } from "react-hook-form";
@@ -10,9 +9,7 @@ import {useNavigation} from "@react-navigation/native";
 import {CustomInput} from "../../ui/CustomInput";
 import { Container } from "../../ui/Grid/Container";
 
-const {backgroundColor} = Colors
-
-export const Auth = () => {
+export const Auth: FC = () => {
 
     const navigation = useNavigation()
     const dispatch = useDispatch()
@@ -24,7 +21,7 @@ export const Auth = () => {
         }
     });
 
-    const onSubmit = data => {
+    const onSubmit = (data: any) => {
         dispatch(login(data.email, data.password))
     };
 
@@ -41,8 +38,6 @@ export const Auth = () => {
             }}>Регистрация</Link>
 
         </Container>
-
-
 
     );
 }

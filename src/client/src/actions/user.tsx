@@ -5,9 +5,8 @@ import {HTTPS, URL} from "../../consts"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setFiles } from "../reducers/fileReducer";
 import { setGroupMessage } from "../reducers/groupMessgeReducer";
-import { socket } from "../../libs/socket";
 
-export const registration = async (email, password) => {
+export const registration = async (email: string, password: string) => {
     try {
         const response = await axios.post(`${HTTPS}${URL}/api/auth/registration`, {
             email,
@@ -19,8 +18,8 @@ export const registration = async (email, password) => {
     }
 }
 
-export const login = (email, password) => {
-    return async dispatch => {
+export const login = (email: string, password: string) => {
+    return async (dispatch: any) => {
         try {
             const {data} = await axios.post(`${HTTPS}${URL}/api/auth/login`, {
                 email,

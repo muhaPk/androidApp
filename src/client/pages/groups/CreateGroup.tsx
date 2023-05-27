@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, FC} from 'react';
 import {TouchableOpacity} from "react-native"
 import styled from 'styled-components/native';
 import {useForm} from "react-hook-form";
@@ -9,11 +9,11 @@ import {createGroup} from "../../src/actions/group";
 import {launchImageLibrary} from 'react-native-image-picker';
 import {Container} from "../../ui/Grid/Container";
 
-export const CreateGroup = () => {
+export const CreateGroup: FC = () => {
 
     const dispatch = useDispatch()
 
-    const [file, setFile] = useState(null)
+    const [file, setFile] = useState<object | null>(null)
 
     const { control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -22,7 +22,7 @@ export const CreateGroup = () => {
         }
     });
 
-    const onSubmit = data => {
+    const onSubmit = (data: any) => {
         dispatch(createGroup(data.name, data.description, file))
     };
 

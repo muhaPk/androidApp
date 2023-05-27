@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 
 import styled from 'styled-components/native';
 import { useForm, Controller } from "react-hook-form";
@@ -8,7 +8,7 @@ import {useNavigation} from "@react-navigation/native";
 import {CustomInput} from "../../ui/CustomInput";
 import {Container} from "../../ui/Grid/Container";
 
-export const Registration = () => {
+export const Registration: FC = () => {
 
     const navigation = useNavigation();
 
@@ -19,7 +19,7 @@ export const Registration = () => {
         }
     });
 
-    const onSubmit = data => {
+    const onSubmit = (data: any) => {
         console.log("Registration.js data:", data)
         registration(data.email, data.password)
     };

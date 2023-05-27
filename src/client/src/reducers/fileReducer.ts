@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 const fileReducer = createSlice({
   name: 'files',
@@ -6,17 +6,17 @@ const fileReducer = createSlice({
     files: [],
   },
   reducers: {
-    setFiles(state, action) {
+    setFiles(state, action: PayloadAction<any>) {
       state.files = action.payload
     },
-    setFile(state, action) {
+    setFile(state, action: PayloadAction<any>) {
       state.files.push(action.payload);
     },
-    resetFiles(state) {
+    clearFiles(state) {
       state.files = []
     },
   },
 });
 
 export default fileReducer.reducer;
-export const {setFiles, setFile, resetFiles} = fileReducer.actions;
+export const {setFiles, setFile, clearFiles} = fileReducer.actions;

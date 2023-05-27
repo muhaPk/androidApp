@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useMemo} from 'react';
+import React, {FC, useEffect, useState, useMemo} from 'react';
 import {Image} from 'react-native'
 import styled from 'styled-components/native';
 import {useSelector} from "react-redux";
@@ -7,14 +7,16 @@ import { Chat } from "../../components/Chat"
 import { Container } from "../../ui/Grid/Container";
 import { Text } from "../../ui/Grid/Text";
 
-export const Group = ({route}) => {
+type Props = {
+    route: object
+}
 
-    const {groups, files} = useSelector(state => state)
+export const Group: FC<Props> = ({route}: Props) => {
 
-    const [group, setGroup] = useState(0);
-    const [file, setFile] = useState({
-        path: 'default.png',
-    });
+    const {groups, files} = useSelector((state: any) => state)
+
+    const [group, setGroup] = useState<object | null>(null);
+    const [file, setFile] = useState<object>({path: 'default.png'});
 
     useEffect(() => {
         if (route?.params?.id) {
@@ -38,8 +40,8 @@ export const Group = ({route}) => {
         <Container>
 
             {/*<ImageWrapper filePath="https://pbs.twimg.com/profile_images/486929358120964097/gNLINY67_400x400.png" />*/}
-            <Text>{group.name}</Text>
-            <Text>{group.description}</Text>
+            <Text>{group?.name}</Text>
+            <Text>{group?.description}</Text>
 
             <Chat groupId={route?.params?.id} />
 

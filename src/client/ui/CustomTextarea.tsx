@@ -1,13 +1,9 @@
+import React, {FC} from "react";
 import {View, Text, TextInput} from "react-native"
-import React, {useState} from "react";
 import {Controller} from "react-hook-form";
-import {Colors} from "../consts"
+import {FormData} from "../types/data"
 
-export const CustomTextarea = ({control, errors, placeholder, name, ...rest}) => {
-
-    const {underlineColor, underlineActiveColor} = Colors
-
-    const [inputStyle, setInputStyle] = useState(underlineColor);
+export const CustomTextarea: FC<FormData> = ({control, errors, placeholder, name, ...rest}: FormData) => {
 
     return (
         <>
@@ -33,9 +29,7 @@ export const CustomTextarea = ({control, errors, placeholder, name, ...rest}) =>
 
                             onBlur={() => {
                                 onBlur();
-                                setInputStyle(underlineColor);
                             } }
-                            onFocus={() => setInputStyle(underlineActiveColor)}
                             placeholderTextColor="#aaa"
                             underlineColorAndroid="transparent"
                             style={{color: "white", paddingTop: 5, paddingBottom: 5, textAlignVertical: 'top'}}

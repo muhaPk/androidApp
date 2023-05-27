@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { Button } from "react-native-paper";
 import {Colors} from "../consts";
 
-export const CustomButton = ({type, title, ...rest}) => {
+type Props = {
+    type: string;
+    title: string;
+}
+
+export const CustomButton: FC<Props> = ({type, title, ...rest}: Props) => {
 
     const {textColor, blueColor} = Colors
 

@@ -1,13 +1,14 @@
+import React, {FC, useState} from "react";
 import {View, Text, TextInput} from "react-native"
-import React, {useState} from "react";
 import {Controller} from "react-hook-form";
 import {Colors} from "../consts"
+import {FormData} from "../types/data"
 
-export const CustomInput = ({control, errors, placeholder, name, ...rest}) => {
-  
+export const CustomInput: FC<FormData> = ({control, errors, placeholder, name, ...rest}: FormData) => {
+
     const {underlineColor, underlineActiveColor} = Colors
 
-    const [inputStyle, setInputStyle] = useState(underlineColor);
+    const [inputStyle, setInputStyle] = useState<string>(underlineColor);
 
     return (
         <>
