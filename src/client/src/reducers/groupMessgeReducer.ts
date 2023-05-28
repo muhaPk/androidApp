@@ -1,10 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+type groupMessagesType = {
+    _id: string;
+    user_id: string,
+    group_id: string,
+    message: string,
+    date: string,
+}
+
+type InitialState = {
+    groupMessages: groupMessagesType[],
+}
+
+const initialState: InitialState = {
+    groupMessages: [],
+}
+
 const groupMessageReducer = createSlice( {
     name: 'groupMessage',
-    initialState: {
-        groupMessages: [],
-    },
+    initialState,
     reducers: {
         setGroupMessage(state, action: PayloadAction<any>) {
             state.groupMessages = action.payload

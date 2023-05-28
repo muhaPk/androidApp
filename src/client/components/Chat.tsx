@@ -42,10 +42,12 @@ export const Chat: FC<Props> = ({groupId}: Props) => {
   useEffect(() => {
     socket.on("updateMessages", () => {
       console.log("updateMessages");
-      // dispatch(getLastGroupMessages(groupId));
+      dispatch(getLastGroupMessages(groupId));
     });
 
-    return () => socket.emit("leaveRoom", groupId);
+    return () => {
+      socket.emit("leaveRoom", groupId);
+    }
   }, [groupId]);
 
   const { control, handleSubmit, reset, formState: { errors } } = useForm({
